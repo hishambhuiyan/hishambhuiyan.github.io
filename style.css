@@ -327,5 +327,63 @@ justify-content:center;
 flex-wrap:wrap;
 
 }
+    
+
+}
+.btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.ripple{
+
+    position:absolute;
+
+    width:20px;
+
+    height:20px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transform:translate(-50%,-50%) scale(0);
+
+    animation:ripple .6s linear;
+
+    opacity:.6;
+
+}
+
+@keyframes ripple{
+
+    to{
+
+        transform:translate(-50%,-50%) scale(18);
+
+        opacity:0;
+
+    }
+
+}
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(80px);
+
+    transition:1s;
+
+}
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
 
 }
