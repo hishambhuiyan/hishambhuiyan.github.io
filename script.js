@@ -252,3 +252,133 @@ topBtn.style.pointerEvents="none";
 }
 
 });
+
+//========================
+// TOTAL STARS + REPOS
+//========================
+
+fetch("https://api.github.com/users/hishambhuiyan/repos?per_page=100")
+.then(res => res.json())
+.then(repos => {
+
+let stars = 0;
+
+repos.forEach(repo => {
+    stars += repo.stargazers_count;
+});
+
+const star = document.getElementById("stars");
+
+if(star){
+    star.innerText = stars;
+}
+
+const container = document.createElement("div");
+
+container.className = "repo-list";
+
+repos.slice(0,6).forEach(repo=>{
+
+const card = document.createElement("div");
+
+card.className = "repo-card";
+
+card.innerHTML = `
+
+<h3>${repo.name}</h3>
+
+<p>${repo.description ?? "No description available."}</p>
+
+<a href="${repo.html_url}" target="_blank">
+
+View Repository
+
+</a>
+
+`;
+
+container.appendChild(card);
+
+});
+
+const github = document.querySelector(".github");
+
+if(github){
+
+github.appendChild(container);
+
+}
+
+});
+
+
+
+//========================
+// MOBILE MENU
+//========================
+
+const menu=document.querySelector(".menu");
+
+const nav=document.querySelector(".navbar ul");
+
+menu.onclick=()=>{
+
+nav.classList.toggle("open");
+
+};
+
+
+
+//========================
+// MOUSE GLOW
+//========================
+
+const glow=document.createElement("div");
+
+glow.className="cursor-glow";
+
+document.body.appendChild(glow);
+
+document.addEventListener("mousemove",e=>{
+
+glow.style.left=e.clientX+"px";
+
+glow.style.top=e.clientY+"px";
+
+});
+
+
+
+//========================
+// CONTACT FORM
+//========================
+
+const form=document.querySelector(".contact-form");
+
+if(form){
+
+form.addEventListener("submit",e=>{
+
+e.preventDefault();
+
+const name=form.querySelector("input[type=text]").value.trim();
+
+const email=form.querySelector("input[type=email]").value.trim();
+
+const msg=form.querySelector("textarea").value.trim();
+
+if(name==""||email==""||msg==""){
+
+alert("Please fill all fields.");
+
+return;
+
+}
+
+alert("Message Ready ✅");
+
+form.reset();
+
+});
+
+}
